@@ -26,9 +26,11 @@ func main() {
 	}
 	c, err := secretmanager.NewClient(ctx)
 	if err != nil {
-		return
+		fmt.Println(err)
+		os.Exit(2)
 	}
 	defer c.Close()
+	
 	req := &secretmanagerpb.AccessSecretVersionRequest{
 		Name: fmt.Sprintf("projects/%s/secrets/%s/versions/latest", credentials.ProjectID, secret),
 	}
